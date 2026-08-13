@@ -1,1 +1,1 @@
-# marketplacetest
+Apenas um teste de um Marketplace funcional pelo Local Storage
