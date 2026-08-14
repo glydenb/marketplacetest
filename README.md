@@ -1,1 +1,1 @@
-Apenas um teste de um Marketplace funcional pelo Local Storage
+Mudando a estrutura do Marketplace, agora se chamando Market in One Place
