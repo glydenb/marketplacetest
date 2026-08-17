@@ -3,9 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Marketplace</title>
 </head>
 <body>
+    <header class="topbar">
+        <a class="brand" href="index.html">Market in One Place</a>
+        <nav class="nav-actions" aria-label="Navegação principal">
+            <span id="userGreeting" class="user-greeting"></span>
+            <a id="loginLink" class="link-button" href="login.html">Entrar</a>
+            <button id="logoutButton" class="link-button hidden" type="button">Sair</button>
+            <button id="cartButton" class="cart-button" type="button">
+                Carrinho <span id="cartCount" class="cart-count">0</span>
+            </button>
+        </nav>
+    </header>
+
+<main class="catalogo">
+    <section class="catalog-intro">
+        <div>
+            <span class="eyebrow">Market in One Place</span>
+            <h1>Catálogo de Produtos</h1>
+            <p>Escolha seus produtos, defina as quantidades e envie vários itens ao carrinho de uma vez.</p>
+        </div>
+
+        <div class="catalog-summary" aria-label="Informações do catálogo">
+            <div>
+                <span>Produtos</span>
+                <strong id="catalogProductCount">0</strong>
+            </div>
+            <div>
+                <span>No carrinho</span>
+                <strong id="heroCartCount">0 itens</strong>
+            </div>
+        </div>
+    </section>
+
+    <section class="catalogo-bar" aria-label="Filtros do catálogo">
+        <label class="search-field">
+            <span>Buscar</span>
+            <input id="searchInput" type="search" placeholder="Nome ou descrição do produto" autocomplete="off">
+        </label>
+
+        <label class="filter-field">
+            <span>Categorias</span>
+            <select id="categoryFilter">
+                <option value="todos">Todas</option>
+                <option value="tecnologia">Tecnologia</option>
+                <option value="casa">Casa</option>
+                <option value="escritorio">Escritório</option>
+            </select>
+        </label>
+
+        <button id="clearFiltersButton" class="secondary-button toolbar-button" type="button">Limpar filtros</button>
+        </section>
+
+        <section class="catalogo-actions">
+            <span id="selectedCount" class="selected-count">0 itens selecionados</span>
+            <button id="addToCartButton" class="primary-button" type="button">Adicionar selecionados</button>
+            <div class="carousel-controls" aria-label="Controles do carrossel">
+                <button id="prevButton" class="carousel-button" type="button">Anterior</button>
+                <button id="nextButton" class="carousel-button" type="button">Próximo</button>
+            </div>
+        </section>
+</main>
     
 </body>
 </html>
