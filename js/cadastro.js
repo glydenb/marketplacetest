@@ -17,12 +17,17 @@ function getSession() {
 }
 
 function setSession(user) {
-    localStorage.setItem(AUTH_KEYS.session, JSON.stringify){
+    const session = {
         id: user.id,
         name: user.name,
         email: user.email,
         loggedAt: new Date().toISOString()
-    }
+    };
+
+    localStorage.setItem(
+        AUTH_KEYS.session,
+        JSON.stringify(session)
+    );
 }
 
 function clearSession(){
