@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketplace</title>
+    <link rel="stylesheets" href="/css/style.css">
 </head>
 <body>
     <header class="topbar">
@@ -23,7 +24,7 @@
         <div>
             <span class="eyebrow">Market in One Place</span>
             <h1>Catálogo de Produtos</h1>
-            <p>Escolha seus produtos, defina as quantidades e envie vários itens ao carrinho de uma vez.</p>
+            <p>Escolha seus produtos, defina as quantidades e/ou envie vários itens ao carrinho de uma vez.</p>
         </div>
 
         <div class="catalog-summary" aria-label="Informações do catálogo">
@@ -61,11 +62,42 @@
             <span id="selectedCount" class="selected-count">0 itens selecionados</span>
             <button id="addToCartButton" class="primary-button" type="button">Adicionar selecionados</button>
             <div class="carousel-controls" aria-label="Controles do carrossel">
-                <button id="prevButton" class="carousel-button" type="button">Anterior</button>
-                <button id="nextButton" class="carousel-button" type="button">Próximo</button>
+                <button id="prevButton" class="carousel-button" type="button" aria-label="Anterior">←</button>
+                <button id="nextButton" class="carousel-button" type="button" aria-label="Próximo">→</button>
             </div>
         </section>
 </main>
-    
+
+            <div id="productsCarousel" class="products-carousel" tabindex="0" aria-label="Carrossel de produtos">
+                <div id="productsGrid" class="products-track"></div>
+            </div>
+    <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+        <div class="cart-header">
+            <div>
+                <span class="eyebrow">Seu carrinho
+                    <h2>Carrinho</h2>
+                </span>
+            </div>
+            <button id="closeCartButton" class="icon-button" type="button" aria-label="Fechar carrinho">×</button>
+        </div>
+
+            <div id="cartItems" class="cart-items"></div>
+
+            <div class="cart-footer">
+                <div class="cart-total-row">
+                    <span>Total</span>
+                    <strong id="cartTotal">R$ 0,00</strong>
+            </div>
+            <button id="checkoutButton" class="primary-button full-width" type="button">Finalizar compra</button>
+            <button id="clearCartButton" class="secondary-button full-width" type="button">Limpar carrinho</button>
+        </div>
+    </aside>
+
+    <div id="overlay" class="overlay"></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
+
+<script src="js/cadastro.js"></script>
+<script src="js/products.js"></script>
+
 </html>
