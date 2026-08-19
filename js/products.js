@@ -16,7 +16,7 @@ const products = [
     },
     {
         id: 3,
-        name: "Monitor 24\"",
+        name: "Monitor 24pol Full HD",
         category: "tecnologia",
         price: 300,
         description: "Monitor LED Full HD com tecnologia IPS."
