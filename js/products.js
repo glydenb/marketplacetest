@@ -167,7 +167,7 @@ function getFilteredProducts() {
 
     return products.filter((product) => {
         const matchesSearch = product.name.toLowerCase().includes(search);
-         product.description.toLowerCase().includes(search);
+        const matchesDescription = product.description.toLowerCase().includes(search);
         const matchesCategory = category === "todos" || product.category === category;
         return matchesSearch && matchesCategory;
     });
@@ -230,4 +230,131 @@ function renderProducts(){
 
     updateSelectedCounter();
     document.getElementById("productCarousel").scrollTo({ left: 0, behavior: "smooth" });
+}
+
+function renderCart() {
+  const container = document.getElementById("cartItems");
+  const totalElement = document.getElementById("cartTotal");
+  const cart = getCart();
+
+  if (cart.length === 0) {
+    container.innerHTML = '<div class="cart-empty">Seu carrinho está vazio.</div>';
+    totalElement.textContent = formatCurrency(0);
+    return;
+  }
+
+  let total = 0;
+
+  container.innerHTML = cart.map((item) => {
+    const product = getProductById(item.productId);
+    if (!product) return "";
+
+    const subtotal = product.price * item.quantity;
+    total += subtotal;
+
+    return `
+      <div class="cart-item">
+        <div class="cart-item-main">
+          <span class="category-pill">${formatCategory(product.category)}</span>
+          <h4>${product.name}</h4>
+          <small>${formatCurrency(product.price)} cada</small>
+          <div class="cart-item-controls">
+            <button type="button" data-cart-action="decrease" data-id="${product.id}">−</button>
+            <strong>${item.quantity}</strong>
+            <button type="button" data-cart-action="increase" data-id="${product.id}">+</button>
+          </div>
+        </div>
+        <div class="cart-item-side">
+          <strong>${formatCurrency(subtotal)}</strong>
+          <button class="remove-button" type="button" data-cart-action="remove" data-id="${product.id}">Remover</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  totalElement.textContent = formatCurrency(total);
+}
+
+function updateCartCounters() {
+  const cart = getCart();
+  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  document.getElementById("cartCount").textContent = count;
+  document.getElementById("heroCartCount").textContent = `${count} ${count === 1 ? "item" : "itens"}`;
+}
+
+function updateAuthUI() {
+  const session = getSession();
+  const greeting = document.getElementById("userGreeting");
+  const loginLink = document.getElementById("loginLink");
+  const logoutButton = document.getElementById("logoutButton");
+
+  if (session) {
+    const firstName = session.name.split(" ")[0];
+    greeting.textContent = `Olá, ${firstName}`;
+    loginLink.classList.add("hidden");
+    logoutButton.classList.remove("hidden");
+  } else {
+    greeting.textContent = "";
+    loginLink.classList.remove("hidden");
+    logoutButton.classList.add("hidden");
+  }
+}
+
+function logout () {
+    clearSession();
+    updateAuthUI();
+    showToast("Você saiu da sua conta.");
+}
+
+function openCart() {
+    document.getElementById("cartDrawer").classList.add("open");
+    document.getElementById("Overlay").classList.add("open");
+    document.getElementById("cartDrawer").setAttribute("aria-hidden", "true");
+}
+
+function scrollCaroulsel(direction) {
+    const carousel = document.getElementById("productCarousel");
+    const firstCard = caroulse.querySelectorAll(".product-card");
+    const distance = firstCard ? firstCard.getBoudingClientRect().width + 18 : 340;
+    caroulsel.scrollBy({left: distance * direction, behavior: "smooth"});
+}
+
+function clearFilters() {
+  document.getElementById("searchInput").value = "";
+  document.getElementById("categoryFilter").value = "todos";
+  renderProducts();
+}
+
+let toastTimer;
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2400);
+}
+
+function checkout() {
+  const cart = getCart();
+
+  if (cart.length === 0) {
+    showToast("Seu carrinho está vazio.");
+    return;
+  }
+
+  if (!getSession()) {
+    showToast("Entre na sua conta para finalizar seu pedido.");
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 900);
+    return;
+  }
+
+  saveCart([]);
+  closeCart();
+  showToast("Pedido registrado com sucesso.");
 }
