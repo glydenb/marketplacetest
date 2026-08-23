@@ -358,3 +358,63 @@ function checkout() {
   closeCart();
   showToast("Pedido registrado com sucesso.");
 }
+
+document.getElementById("productsGrid").addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-action]");
+  if (!button) return;
+
+  const productId = Number(button.dataset.id);
+  const current = selectedQuantities.get(productId) || 1;
+
+  if (button.dataset.action === "add") {
+    addToCart(productId, current);
+    showToast("Produto adicionado ao carrinho.");
+    return;
+  }
+
+  const next = button.dataset.action === "increase" ? current + 1 : Math.max(1, current - 1);
+  selectedQuantities.set(productId, next);
+
+  const quantityElement = document.querySelector(`[data-quantity-for="${productId}"]`);
+  if (quantityElement) quantityElement.textContent = next;
+});
+
+document.getElementById("productsGrid").addEventListener("change", (event) => {
+  if (!event.target.matches(".product-select")) return;
+  event.target.closest(".product-card")?.classList.toggle("selected", event.target.checked);
+  updateSelectedCounter();
+});
+
+document.getElementById("cartItems").addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-cart-action]");
+  if (!button) return;
+
+  const productId = Number(button.dataset.id);
+  const action = button.dataset.cartAction;
+
+  if (action === "increase") updateCartItem(productId, 1);
+  if (action === "decrease") updateCartItem(productId, -1);
+  if (action === "remove") removeCartItem(productId);
+});
+
+document.getElementById("searchInput").addEventListener("input", renderProducts);
+document.getElementById("categoryFilter").addEventListener("change", renderProducts);
+document.getElementById("clearFiltersButton").addEventListener("click", clearFilters);
+document.getElementById("addSelectedButton").addEventListener("click", addSelectedProducts);
+document.getElementById("carouselPrev").addEventListener("click", () => scrollCarousel(-1));
+document.getElementById("carouselNext").addEventListener("click", () => scrollCarousel(1));
+document.getElementById("cartButton").addEventListener("click", openCart);
+document.getElementById("closeCartButton").addEventListener("click", closeCart);
+document.getElementById("overlay").addEventListener("click", closeCart);
+document.getElementById("clearCartButton").addEventListener("click", clearCart);
+document.getElementById("checkoutButton").addEventListener("click", checkout);
+document.getElementById("logoutButton").addEventListener("click", logout);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeCart();
+});
+
+renderProducts();
+renderCart();
+updateCartCounters();
+updateAuthUI();

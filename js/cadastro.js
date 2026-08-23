@@ -45,4 +45,21 @@ function showFormMessage(message, type = "error") {
   element.textContent = message;
   element.className = `form-aviso ${type}`;
 }
- 
+
+function clearFieldErrors() {
+    document.querySelectorAll("field-error").forEach((el) => {
+        element.textContent = "";
+    });
+}
+
+function registerUser(event) {
+    event.preventDefault();
+    clearFieldErrors();
+    showFormMessage("");
+
+    const name =
+    const email =
+    const password =
+    const passwordConfirm =
+    const terms =
+
