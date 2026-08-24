@@ -1,55 +1,55 @@
 const AUTH_KEYS = {
-    users: "marketplace_users",
-    session: "marketplace_session",
-    rememberedEmail: "marketplace_remembered_emails"
+  users: "bluemarket_users",
+  session: "bluemarket_session",
+  rememberedEmail: "bluemarket_remembered_email"
 };
 
 function getUsers() {
-    return JSON.parse(localStorage.getItem(AUTH_KEYS.users));
+  return JSON.parse(localStorage.getItem(AUTH_KEYS.users)) || [];
 }
 
 function saveUsers(users) {
-    localStorage.setItem(AUTH_KEYS.users, JSON.stringify(users));
+  localStorage.setItem(AUTH_KEYS.users, JSON.stringify(users));
 }
 
 function getSession() {
-    return JSON.parse(localStorage.getItem(AUTH_KEYS.session));
+  return JSON.parse(localStorage.getItem(AUTH_KEYS.session));
 }
 
 function setSession(user) {
-    const session = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        loggedAt: new Date().toISOString()
-    };
-
-    localStorage.setItem(
-        AUTH_KEYS.session,
-        JSON.stringify(session)
-    );
+  localStorage.setItem(AUTH_KEYS.session, JSON.stringify({
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    loggedAt: new Date().toISOString()
+  }));
 }
 
-function clearSession(){
-    localStorage.removeItem(AUTH_KEYS.session);
+function clearSession() {
+  localStorage.removeItem(AUTH_KEYS.session);
 }
 
-function normalizeEmail(email){
-    return email.trim().toLowerCase();
+function normalizeEmail(email) {
+  return email.trim().toLowerCase();
 }
 
 function showFormMessage(message, type = "error") {
-  const element = document.getElementById("formAviso"); // <- ID formAviso na page de cadastro
+  const element = document.getElementById("formMessage");
   if (!element) return;
 
   element.textContent = message;
-  element.className = `form-aviso ${type}`;
+  element.className = `form-message ${type}`;
+}
+
+function setFieldError(id, message) {
+  const element = document.querySelector(`[data-error-for="${id}"]`);
+  if (element) element.textContent = message;
 }
 
 function clearFieldErrors() {
-    document.querySelectorAll("field-error").forEach((el) => {
-        element.textContent = "";
-    });
+  document.querySelectorAll(".field-error").forEach((element) => {
+    element.textContent = "";
+  });
 }
 
 function registerUser(event) {

@@ -1,123 +1,124 @@
 const products = [
-    {
-        id: 1,
-        name: "Fone Ilidan",
-        category: "tecnologia",
-        price: 170,
-        description: "Fone sem fio com estojo de conexão Bluetooth."
-    },
-
-    {
-        id: 2,
-        name: "Cadeira Gamer",
-        category: "casa",
-        price: 150,
-        description: "Cadeira ergonômica para gamers."
-    },
-    {
-        id: 3,
-        name: "Monitor 24pol Full HD",
-        category: "tecnologia",
-        price: 300,
-        description: "Monitor LED Full HD com tecnologia IPS."
-    },
-    {
-        id: 4,
-        name: "Teclado Mecânico",
-        category: "tecnologia",
-        price: 200,
-        description: "Teclado mecânico com switches de alta qualidade."
-    },
-    {
-        id: 5,
-        name: "Mouse Gamer",
-        category: "tecnologia",
-        price: 100,
-        description: "Mouse ergonômico para gamers."
-    },
-    {
-        id: 6,
-        name: "Caderno do Ben 10",
-        category: "escritorio",
-        price: 15,
-        description: "Caderno com ilustrações do Ben 10."
-    },
-    {
-        id: 7,
-        name: "Vaso de Flores",
-        category: "casa",
-        price: 87.9,
-        description: "Vaso de flores com design moderno."
-    },
-    {
-        id: 8,
-        name: "Bonsai",
-        category: "casa",
-        price: 12.5,
-        description: "Bonsai artificial decorativo."
-    },
-    {
-        id: 9,
-        name: "Luminária",
-        category: "escritorio",
-        price: 25,
-        description: "Luminária com design moderno."
-    },
+  {
+    id: 1,
+    name: "Fone Razer",
+    category: "tecnologia",
+    price: 189.9,
+    description: "Fone sem fio com estojo compacto e conexão Bluetooth."
+  },
+  {
+    id: 2,
+    name: "Luminária",
+    category: "casa",
+    price: 129.9,
+    description: "Luz de mesa com controle remoto."
+  },
+  {
+    id: 3,
+    name: "Teclado Ninja",
+    category: "tecnologia",
+    price: 249.9,
+    description: "Teclado gamer 70% com switch brown."
+  },
+  {
+    id: 4,
+    name: "Agenda",
+    category: "escritorio",
+    price: 39.9,
+    description: "Agenda para organização."
+  },
+  {
+    id: 5,
+    name: "Sashineca",
+    category: "casa",
+    price: 49.9,
+    description: "Caneca com foto de um gato chamado Sashimi."
+  },
+  {
+    id: 6,
+    name: "Mouse Cobra",
+    category: "tecnologia",
+    price: 119.9,
+    description: "Mouse sem fio compacto com clique silencioso."
+  },
+  {
+    id: 7,
+    name: "Organizador de Fios",
+    category: "escritorio",
+    price: 79.9,
+    description: "Organizador de fios."
+  },
+  {
+    id: 8,
+    name: "Bonsai",
+    category: "casa",
+    price: 69.9,
+    description: "Planta decorativa para escritórios."
+  },
+  {
+    id: 9,
+    name: "Soundbar RGB",
+    category: "tecnologia",
+    price: 99.9,
+    description: "Soundbar sem fio para computadores ou notebooks."
+  }
 ];
 
-const CART_KEY = "marketplace_cart";
+const CART_KEY = "bluemarket_cart";
 const selectedQuantities = new Map();
 
 function formatCurrency(value) {
-    return value.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    });
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  }).format(value);
 }
 
 function formatCategory(category) {
-    const names = {
-        tecnologia: "Tecnologia",
-        casa: "Casa",
-        escritorio: "Escritório"
-    };
-    return names[category] || category;
-    }
+  const names = {
+    tecnologia: "Tecnologia",
+    casa: "Casa",
+    escritorio: "Escritório"
+  };
+
+  return names[category] || category;
+}
 
 function getCart() {
-    const cart = JSON.parse(localStorage.getItem(CART_KEY));
-    return cart || [];
+  return JSON.parse(localStorage.getItem(CART_KEY)) || [];
 }
 
 function saveCart(cart) {
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
-    renderCart();
-    updateCartCounters();
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  renderCart();
+  updateCartCounters();
 }
 
-function getProductById(productId) {
-    return products.find(product => product.id === Number(id));
+function getProductById(id) {
+  return products.find((product) => product.id === Number(id));
 }
 
 function addToCart(productId, quantity = 1) {
-    const cart = getCart();
-    const item = cart.find(item => item.productId === productId);
-    if (item) {
-        item.quantity += quantity;
-    } else {
-        cart.push({ productId, quantity });
-    }
-    saveCart(cart);
+  const cart = getCart();
+  const item = cart.find((cartItem) => cartItem.productId === productId);
+
+  if (item) {
+    item.quantity += quantity;
+  } else {
+    cart.push({ productId, quantity });
+  }
+
+  saveCart(cart);
 }
 
 function getSelectedCheckboxes() {
-    return document.querySelectorAll('.product-select:checked');
+  return [...document.querySelectorAll(".product-select:checked")];
 }
 
 function updateSelectedCounter() {
-    const count = getSelectedCheckboxes().length;
-    const selectedCount = document.getElementById('selectedCount');
-    selectedCount.textContent = `${count === 1 ? "selecionado" : "selecionados"}`;
+  const count = getSelectedCheckboxes().length;
+  const selectedCount = document.getElementById("selectedCount");
+  selectedCount.textContent = `${count} ${count === 1 ? "selecionado" : "selecionados"}`;
 }
 
 function addSelectedProducts() {
@@ -144,92 +145,92 @@ function addSelectedProducts() {
 }
 
 function updateCartItem(productId, delta) {
-    const cart = getCart();
-    const item = cart.find((cartItem) => cartItem.productId === productId);
-    if (!item) return;
+  const cart = getCart();
+  const item = cart.find((cartItem) => cartItem.productId === productId);
+  if (!item) return;
 
-    item.quantity += delta;
-    saveCart(cart.filter((cartItem) => cartItem.quantity > 0));
+  item.quantity += delta;
+  saveCart(cart.filter((cartItem) => cartItem.quantity > 0));
 }
 
 function removeCartItem(productId) {
-    saveCart(getCart().filter((item) => item.productId !== productId));
+  saveCart(getCart().filter((item) => item.productId !== productId));
 }
 
 function clearCart() {
-    saveCart([]);
-    showToast("Carrinho limpo.");
+  saveCart([]);
+  showToast("Carrinho limpo.");
 }
 
 function getFilteredProducts() {
-    const search = document.getElementById("searchInput").value.toLowerCase();
-    const category = document.getElementById("categoryFilter").value;
+  const search = document.getElementById("searchInput").value.trim().toLowerCase();
+  const category = document.getElementById("categoryFilter").value;
 
-    return products.filter((product) => {
-        const matchesSearch = product.name.toLowerCase().includes(search);
-        const matchesDescription = product.description.toLowerCase().includes(search);
-        const matchesCategory = category === "todos" || product.category === category;
-        return matchesSearch && matchesCategory;
-    });
+  return products.filter((product) => {
+    const matchesSearch = product.name.toLowerCase().includes(search) ||
+      product.description.toLowerCase().includes(search);
+    const matchesCategory = category === "todos" || product.category === category;
+    return matchesSearch && matchesCategory;
+  });
 }
 
-function renderProducts(){
-    const track = document.getElementById("productGrid");
-    const filteredProducts = getFilteredProducts();
-    const countText = document.getElementById("productCountText");
+function renderProducts() {
+  const track = document.getElementById("productsGrid");
+  const filteredProducts = getFilteredProducts();
+  const countText = document.getElementById("productCountText");
 
-    document.getElementById("catalogProductCount").textContent = products.length;
-    countText.textContent = `${filteredProducts.length} ${products.length} === 1 ? "produto encontrado" : "produtos encontrados"}`;
+  document.getElementById("catalogProductCount").textContent = products.length;
+  countText.textContent = `${filteredProducts.length} ${filteredProducts.length === 1 ? "produto encontrado" : "produtos encontrados"}`;
 
-    if (filteredProducts.length === 0) {
-        track.innerHTML = `
-        <div class="catalog-empty">
-            <strong>Nenhum produto encontrado</strong>
-            <span>Altere ou busque a categoria.</span>
-        </div>
-        `;
+  if (filteredProducts.length === 0) {
+    track.innerHTML = `
+      <div class="catalog-empty">
+        <strong>Nenhum produto encontrado</strong>
+        <span>Altere a busca ou a categoria.</span>
+      </div>
+    `;
     updateSelectedCounter();
     return;
-    }
+  }
 
-    track.innerHTML = filteredProducts.map((product) => {
-        const quantity = selectedQuantities.get(product.id) || 1;
-        return `
-        <article class="product-card">
-            <label class="product-check">
-                <input class="product-select" type="checkbox" data-id="${product.id}">
-                <span>Selecionar</span>
-            </label>
+  track.innerHTML = filteredProducts.map((product) => {
+    const quantity = selectedQuantities.get(product.id) || 1;
+    return `
+      <article class="product-card">
+        <label class="product-check">
+          <input class="product-select" type="checkbox" data-id="${product.id}">
+          <span>Selecionar</span>
+        </label>
 
-            <div class="product-card-top">
-                <span class="category-pill">${formatCategory(product.category)}</span>
-                <span class="stock-label>Em estoque</span>
-            </div>
+        <div class="product-card-top">
+          <span class="category-pill">${formatCategory(product.category)}</span>
+          <span class="stock-label">Em estoque</span>
+        </div>
 
-            <div class="product-content">
-                <h3>${product.name}</h3>
-                <p>${product.description}</p>
-            </div>
+        <div class="product-content">
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+        </div>
 
-            <div class="product-price-block">
-                <span>Preço</span>
-                <strong class="price">${formatCurrency(product.price)}</strong>
-            </div>
+        <div class="product-price-block">
+          <span>Preço</span>
+          <strong class="price">${formatCurrency(product.price)}</strong>
+        </div>
 
-            <div class="product-card-bottom">
-                <div class="quantity-control" aria-label="Quantidade de ${product.name}">
-                    <button type="button" data-action="decrease" data-id="${product.id}" aria-label="Diminuir quantidade">-</button>
-                    <span class="quantity">${quantity}</span>
-                    <button type="button" data-action="increase" data-id="${product.id}" aria-label="Aumentar quantidade">+</button>
-                </div>
-                <button class="secondary-button add-one-button" type="button" data-action="add" data-id="${product.id}">Adicionar</button>
-            </div>
-        </article>
+        <div class="product-card-bottom">
+          <div class="quantity-control" aria-label="Quantidade de ${product.name}">
+            <button type="button" data-action="decrease" data-id="${product.id}" aria-label="Diminuir quantidade">−</button>
+            <span data-quantity-for="${product.id}">${quantity}</span>
+            <button type="button" data-action="increase" data-id="${product.id}" aria-label="Aumentar quantidade">+</button>
+          </div>
+          <button class="secondary-button add-one-button" type="button" data-action="add" data-id="${product.id}">Adicionar</button>
+        </div>
+      </article>
     `;
-    }).join();
+  }).join("");
 
-    updateSelectedCounter();
-    document.getElementById("productCarousel").scrollTo({ left: 0, behavior: "smooth" });
+  updateSelectedCounter();
+  document.getElementById("productsCarousel").scrollTo({ left: 0, behavior: "smooth" });
 }
 
 function renderCart() {
@@ -301,23 +302,29 @@ function updateAuthUI() {
   }
 }
 
-function logout () {
-    clearSession();
-    updateAuthUI();
-    showToast("Você saiu da sua conta.");
+function logout() {
+  clearSession();
+  updateAuthUI();
+  showToast("Sessão encerrada.");
 }
 
 function openCart() {
-    document.getElementById("cartDrawer").classList.add("open");
-    document.getElementById("Overlay").classList.add("open");
-    document.getElementById("cartDrawer").setAttribute("aria-hidden", "true");
+  document.getElementById("cartDrawer").classList.add("open");
+  document.getElementById("overlay").classList.add("open");
+  document.getElementById("cartDrawer").setAttribute("aria-hidden", "false");
 }
 
-function scrollCaroulsel(direction) {
-    const carousel = document.getElementById("productCarousel");
-    const firstCard = caroulse.querySelectorAll(".product-card");
-    const distance = firstCard ? firstCard.getBoudingClientRect().width + 18 : 340;
-    caroulsel.scrollBy({left: distance * direction, behavior: "smooth"});
+function closeCart() {
+  document.getElementById("cartDrawer").classList.remove("open");
+  document.getElementById("overlay").classList.remove("open");
+  document.getElementById("cartDrawer").setAttribute("aria-hidden", "true");
+}
+
+function scrollCarousel(direction) {
+  const carousel = document.getElementById("productsCarousel");
+  const firstCard = carousel.querySelector(".product-card");
+  const distance = firstCard ? firstCard.getBoundingClientRect().width + 18 : 340;
+  carousel.scrollBy({ left: distance * direction, behavior: "smooth" });
 }
 
 function clearFilters() {
@@ -347,7 +354,7 @@ function checkout() {
   }
 
   if (!getSession()) {
-    showToast("Entre na sua conta para finalizar seu pedido.");
+    showToast("Entre na sua conta antes de finalizar o pedido.");
     setTimeout(() => {
       window.location.href = "login.html";
     }, 900);
