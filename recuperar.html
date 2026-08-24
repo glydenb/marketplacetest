@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar senha</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+  <main class="auth-shell">
+    <a class="brand auth-brand" href="index.html">Market in One Place</a>
+
+    <section class="auth-card">
+      <span class="eyebrow">Acesso</span>
+      <h1>Recuperar senha</h1>
+      <p>Informe o e-mail cadastrado e defina uma nova senha.</p>
+
+      <form id="recoverForm" class="auth-form" novalidate>
+        <label>
+          E-mail
+          <input id="recoverEmail" type="email" autocomplete="email" required>
+        </label>
+
+        <label>
+          Nova senha
+          <input id="recoverPassword" type="password" autocomplete="new-password" minlength="6" required>
+        </label>
+
+        <label>
+          Confirmar nova senha
+          <input id="recoverPasswordConfirm" type="password" autocomplete="new-password" minlength="6" required>
+        </label>
+
+        <button class="primary-button full-width" type="submit">Alterar senha</button>
+      </form>
+
+      <p class="auth-switch"><a href="login.html">Voltar ao login</a></p>
+      <p id="formMessage" class="form-message"></p>
+    </section>
+  </main>
+
+</body>
+<script src="js/cadastro.js"></script>
+</html>

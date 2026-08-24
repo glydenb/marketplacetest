@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+  <main class="auth-shell">
+    <a class="brand auth-brand" href="index.html">Marketplace</a>
+
+    <section class="auth-card">
+      <span class="eyebrow">Acesso</span>
+      <h1>Entrar</h1>
+      <p>Use seu e-mail e senha cadastrados.</p>
+
+      <form id="loginForm" class="auth-form" novalidate>
+        <label>
+          E-mail
+          <input id="loginEmail" type="email" autocomplete="email" required>
+        </label>
+
+        <label>
+          Senha
+          <input id="loginPassword" type="password" autocomplete="current-password" required>
+        </label>
+
+        <div class="form-row-between">
+          <label class="checkbox-row compact">
+            <input id="rememberMe" type="checkbox">
+            <span>Lembrar e-mail</span>
+          </label>
+          <a href="recuperar.html">Esqueci a senha</a>
+        </div>
+
+        <button class="primary-button full-width" type="submit">Entrar</button>
+      </form>
+
+      <p class="auth-switch">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+      <p id="formMessage" class="form-message"></p>
+    </section>
+  </main>
+
+</body>
+<script src="js/cadastro.js"></script>
+</html>

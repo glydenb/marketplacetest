@@ -1,61 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro | Market in One Place</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="auth">
-    <main class="auth-shell">
-        <a class="brand auth-brand" href="index.html">Marketplace</a>
+<body class="auth-page">
+  <main class="auth-shell">
+    <a class="brand auth-brand" href="index.html">Marketplace</a>
 
-        <section class="auth-card">
-            <span class="eyebrow">Nova Conta</span>
-            <h1>Cadastre-se</h1>
-            <p>Preencha seus dados para acessar o marketplace</p>
+    <section class="auth-card">
+      <span class="eyebrow">Nova conta</span>
+      <h1>Cadastre-se</h1>
+      <p>Preencha seus dados para acessar o site.</p>
 
-            <form id="registerForm" class="auth-form" novalidate>
-                <label>
-                    Nome Completo
-                    <input id="registerName" type="text" autocomplete="name" minlength="3" required>
-                    <small class="field-error" data-error-for="registerName"></small>
-                </label>
+      <form id="registerForm" class="auth-form" novalidate>
+        <label>
+          Nome completo
+          <input id="registerName" type="text" autocomplete="name" minlength="3" required>
+          <small class="field-error" data-error-for="registerName"></small>
+        </label>
 
-                <label>
-                    E-mail
-                    <input id="registerEmail" type="email" autocomplete="email" required>
-                    <small class="field-error" data-error-for="registerEmail"></small>
-                </label>
+        <label>
+          E-mail
+          <input id="registerEmail" type="email" autocomplete="email" required>
+          <small class="field-error" data-error-for="registerEmail"></small>
+        </label>
 
-                <label>
-                    Senha
-                    <input id="registerPassword" type="password" autocomplete="new-password" minlength="6" required>
-                    <small class="field-hint">Mínimo de 6 caracteres.</small>
-                    <small class="field-error" data-error-for="registerPassword"></small>
-                </label>
+        <label>
+          Senha
+          <input id="registerPassword" type="password" autocomplete="new-password" minlength="8" required>
+          <small class="field-hint">Mínimo de 8 caracteres.</small>
+          <small class="field-error" data-error-for="registerPassword"></small>
+        </label>
 
-                <label>
-                    Confirmar Senha
-                    <input id="registerPasswordConfirm" type="password" autocomplete="new-password" minlength="6" required>
-                    <small class="field-error" data-error-for="registerPasswordConfirm"></small>
-                </label>
+        <label>
+          Confirmar senha
+          <input id="registerPasswordConfirm" type="password" autocomplete="new-password" minlength="6" required>
+          <small class="field-error" data-error-for="registerPasswordConfirm"></small>
+        </label>
 
-                <label class="checkbox-row">
-                    <input id="terms" type="checkbox" required>
-                    <span>Aceito os termos de uso deste projeto demonstrativo.</span>
-                </label>
+        <label class="checkbox-row">
+          <input id="terms" type="checkbox" required>
+          <span>Aceito os termos de uso desta demonstração.</span>
+        </label>
+        <small class="field-error" data-error-for="terms"></small>
 
-                <small class="field-error" data-error-for="terms"></small>
-                <button class="primary-button full width" type="submit">Cadastrar</button>
-            </form>
-            
-            <p class="auth-troca">Já cadastrado? <a href="login.html">Faça login</a></p>
-            <p id="formAviso" class="form-aviso"></p>
-        </section>
-    </main>
+        <button class="primary-button full-width" type="submit">Cadastrar</button>
+      </form>
 
-            
+      <p class="auth-switch">Já tem conta? <a href="login.html">Entrar</a></p>
+      <p id="formMessage" class="form-message"></p>
+    </section>
+  </main>
+
+  <script src="js/auth.js"></script>
 </body>
-        <script src="js/cadastro.js" type="module"></script>
 </html>

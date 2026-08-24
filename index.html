@@ -1,103 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketplace</title>
-    <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplace</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="topbar">
-        <a class="brand" href="index.html">Market in One Place</a>
-        <nav class="nav-actions" aria-label="Navegação principal">
-            <span id="userGreeting" class="user-greeting"></span>
-            <a id="loginLink" class="link-button" href="login.html">Entrar</a>
-            <button id="logoutButton" class="link-button hidden" type="button">Sair</button>
-            <button id="cartButton" class="cart-button" type="button">
-                Carrinho <span id="cartCount" class="cart-count">0</span>
-            </button>
-        </nav>
-    </header>
+  <header class="topbar">
+    <a class="brand" href="index.html">Market in One Place</a>
 
-<main class="catalogo">
+    <nav class="nav-actions" aria-label="Navegação principal">
+      <span id="userGreeting" class="user-greeting"></span>
+      <a id="loginLink" class="link-button" href="login.html">Entrar</a>
+      <button id="logoutButton" class="link-button hidden" type="button">Sair</button>
+      <button id="cartButton" class="cart-button" type="button">
+        Carrinho <span id="cartCount" class="cart-count">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="container catalog-page">
     <section class="catalog-intro">
-        <div>
-            <span class="eyebrow">Market in One Place</span>
-            <h1>Catálogo de Produtos</h1>
-            <p>Escolha seus produtos, defina as quantidades e/ou envie vários itens ao carrinho de uma vez.</p>
-        </div>
+      <div>
+        <span class="eyebrow">Market in One Place</span>
+        <h1>Catálogo de Produtos</h1>
+        <p>Escolha seus produtos, defina as quantidades e envie vários itens ao carrinho de uma vez.</p>
+      </div>
 
-        <div class="catalog-summary" aria-label="Informações do catálogo">
-            <div>
-                <span>Produtos</span>
-                <strong id="catalogProductCount">0</strong>
-            </div>
-            <div>
-                <span>No carrinho</span>
-                <strong id="heroCartCount">0 itens</strong>
-            </div>
+      <div class="catalog-summary" aria-label="Informações do catálogo">
+        <div>
+          <span>Produtos</span>
+          <strong id="catalogProductCount">0</strong>
         </div>
+        <div>
+          <span>No carrinho</span>
+          <strong id="heroCartCount">0 itens</strong>
+        </div>
+      </div>
     </section>
 
-    <section class="catalogo-bar" aria-label="Filtros do catálogo">
-        <label class="search-field">
-            <span>Buscar</span>
-            <input id="searchInput" type="search" placeholder="Nome ou descrição do produto" autocomplete="off">
-        </label>
+    <section class="catalog-toolbar" aria-label="Filtros do catálogo">
+      <label class="search-field">
+        <span>Buscar</span>
+        <input id="searchInput" type="search" placeholder="Nome ou descrição do produto" autocomplete="off">
+      </label>
 
-        <label class="filter-field">
-            <span>Categorias</span>
-            <select id="categoryFilter">
-                <option value="todos">Todas</option>
-                <option value="tecnologia">Tecnologia</option>
-                <option value="casa">Casa</option>
-                <option value="escritorio">Escritório</option>
-            </select>
-        </label>
+      <label class="filter-field">
+        <span>Categorias</span>
+        <select id="categoryFilter">
+          <option value="todos">Todas</option>
+          <option value="tecnologia">Tecnologia</option>
+          <option value="casa">Casa</option>
+          <option value="escritorio">Escritório</option>
+        </select>
+      </label>
 
-        <button id="clearFiltersButton" class="secondary-button toolbar-button" type="button">Limpar filtros</button>
-        </section>
+      <button id="clearFiltersButton" class="secondary-button toolbar-button" type="button">Limpar filtros</button>
+    </section>
 
-        <section class="catalogo-actions">
-            <span id="selectedCount" class="selected-count">0 itens selecionados</span>
-            <button id="addToCartButton" class="primary-button" type="button">Adicionar selecionados</button>
-            <div class="carousel-controls" aria-label="Controles do carrossel">
-                <button id="prevButton" class="carousel-button" type="button" aria-label="Anterior">←</button>
-                <button id="nextButton" class="carousel-button" type="button" aria-label="Próximo">→</button>
-            </div>
-        </section>
-</main>
-
-            <div id="productsCarousel" class="products-carousel" tabindex="0" aria-label="Carrossel de produtos">
-                <div id="productsGrid" class="products-track"></div>
-            </div>
-    <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
-        <div class="cart-header">
-            <div>
-                <span class="eyebrow">Seu carrinho
-                    <h2>Carrinho</h2>
-                </span>
-            </div>
-            <button id="closeCartButton" class="icon-button" type="button" aria-label="Fechar carrinho">×</button>
+    <section class="catalog-section">
+      <div class="section-heading catalog-heading">
+        <div>
+          <span class="eyebrow">Produtos disponíveis</span>
+          <h2>Escolha o que você precisa</h2>
+          <p id="productCountText" class="section-note"></p>
         </div>
 
-            <div id="cartItems" class="cart-items"></div>
-
-            <div class="cart-footer">
-                <div class="cart-total-row">
-                    <span>Total</span>
-                    <strong id="cartTotal">R$ 0,00</strong>
-            </div>
-            <button id="checkoutButton" class="primary-button full-width" type="button">Finalizar compra</button>
-            <button id="clearCartButton" class="secondary-button full-width" type="button">Limpar carrinho</button>
+        <div class="catalog-actions">
+          <span id="selectedCount" class="selected-count">0 selecionados</span>
+          <button id="addSelectedButton" class="primary-button" type="button">Adicionar selecionados</button>
+          <div class="carousel-controls" aria-label="Controles do carrossel">
+            <button id="carouselPrev" class="carousel-button" type="button" aria-label="Produtos anteriores">←</button>
+            <button id="carouselNext" class="carousel-button" type="button" aria-label="Próximos produtos">→</button>
+          </div>
         </div>
-    </aside>
+      </div>
 
-    <div id="overlay" class="overlay"></div>
-    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+      <div id="productsCarousel" class="products-carousel" tabindex="0" aria-label="Carrossel de produtos">
+        <div id="productsGrid" class="products-track"></div>
+      </div>
+    </section>
+  </main>
+
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-header">
+      <div>
+        <span class="eyebrow">Sua seleção</span>
+        <h2>Carrinho</h2>
+      </div>
+      <button id="closeCartButton" class="icon-button" type="button" aria-label="Fechar carrinho">×</button>
+    </div>
+
+    <div id="cartItems" class="cart-items"></div>
+
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total</span>
+        <strong id="cartTotal">R$ 0,00</strong>
+      </div>
+      <button id="checkoutButton" class="primary-button full-width" type="button">Finalizar pedido</button>
+      <button id="clearCartButton" class="secondary-button full-width" type="button">Limpar carrinho</button>
+    </div>
+  </aside>
+
+  <div id="overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
 </body>
-
 <script src="js/cadastro.js"></script>
 <script src="js/products.js"></script>
-
 </html>
