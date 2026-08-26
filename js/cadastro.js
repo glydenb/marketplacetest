@@ -1,7 +1,7 @@
 const AUTH_KEYS = {
-  users: "bluemarket_users",
-  session: "bluemarket_session",
-  rememberedEmail: "bluemarket_remembered_email"
+  users: "market_users",
+  session: "market_session",
+  rememberedEmail: "market_remembered_email"
 };
 
 function getUsers() {

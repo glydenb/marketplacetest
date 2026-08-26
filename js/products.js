@@ -64,7 +64,7 @@ const products = [
   }
 ];
 
-const CART_KEY = "bluemarket_cart";
+const CART_KEY = "market_cart";
 const selectedQuantities = new Map();
 
 function formatCurrency(value) {
